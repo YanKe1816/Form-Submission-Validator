@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support | Form Submission Validator</title>
+  <style>
+    :root {
+      --bg: #f5f6f8;
+      --panel: #ffffff;
+      --text: #1f2937;
+      --muted: #5b6472;
+      --accent: #0f766e;
+      --border: #d6dde6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #e6fffb 0%, transparent 28%),
+        linear-gradient(180deg, #eef4f7 0%, var(--bg) 100%);
+    }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 20px 72px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: 0 12px 32px rgba(31, 41, 55, 0.08);
+    }
+    h1, h2 {
+      line-height: 1.15;
+      margin-top: 0;
+    }
+    p { line-height: 1.6; color: var(--muted); }
+    a { color: var(--accent); }
+    nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .eyebrow {
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="panel">
+      <div class="eyebrow">Support</div>
+      <h1>Form Submission Validator</h1>
+      <p>This page is for support related to Form Submission Validator app usage, review, route availability, MCP behavior, validation results, schema output, or technical issues. Contact <a href="mailto:sidcraigau@gmail.com">sidcraigau@gmail.com</a>.</p>
+
+      <h2>What to Include</h2>
+      <p>Include the route you used, the request payload or sample form fields you tested, the expected validation result, the actual response, and any relevant timestamps or error messages.</p>
+
+      <h2>Scope</h2>
+      <p>The app provides read-only support for structured form submission validation. It does not submit forms, fill missing fields, rewrite input, store form data, or call external services.</p>
+
+      <h2>Issue Reports</h2>
+      <p>Send the smallest reproducible example you can so request and response behavior can be reviewed quickly.</p>
+
+      <nav>
+        <a href="/">Home</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/health">Health</a>
+        <a href="/support">Support</a>
+      </nav>
+    </section>
+  </main>
+</body>
+</html>

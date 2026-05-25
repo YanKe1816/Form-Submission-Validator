@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: form-submission-validator
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    envVars:
+      - key: OPENAI_APPS_CHALLENGE
+        sync: false
