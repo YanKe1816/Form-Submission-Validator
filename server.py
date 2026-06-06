@@ -289,7 +289,15 @@ def html_response(filename: str) -> FileResponse:
 
 @app.get("/")
 def root() -> FileResponse:
-    return html_response("index.html")
+    return FileResponse(
+        os.path.join(BASE_DIR, "index.html"),
+        media_type="text/html",
+        headers={
+            "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+            "Pragma": "no-cache",
+            "Expires": "0",
+        },
+    )
 
 
 @app.get("/privacy")
