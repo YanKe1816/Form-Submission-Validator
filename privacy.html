@@ -14,32 +14,122 @@
       --border: #e0d6bd;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); }
-    main { max-width: 860px; margin: 0 auto; padding: 48px 20px 72px; }
-    section { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 32px; box-shadow: 0 12px 32px rgba(31, 41, 51, 0.06); }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 20px 72px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: 0 12px 32px rgba(31, 41, 51, 0.06);
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
     h1, h2 { margin-top: 0; }
-    p, li { line-height: 1.65; color: var(--muted); }
+    h1 { margin-bottom: 8px; }
+    h2 { margin-top: 30px; }
+    p, li {
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    ul { padding-left: 24px; }
     a { color: var(--accent); }
+    code {
+      color: var(--text);
+      background: #f0eadb;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.95em;
+    }
   </style>
 </head>
 <body>
   <main>
     <section>
-      <h1>Privacy Policy</h1>
-      <p>Form Submission Validator only processes the form fields and required field list submitted in the request in order to return a structured validation result.</p>
+      <nav aria-label="Site navigation">
+        <a href="/">Home</a>
+        <a href="/terms">Terms</a>
+        <a href="/support">Support</a>
+        <a href="/health">Health</a>
+      </nav>
+
+      <h1>Privacy Policy for Form Submission Validator</h1>
+      <p><strong>Last updated:</strong> June 2026</p>
+
+      <h2>1. Data Collected</h2>
+      <p>Form Submission Validator processes only the form data submitted by the user in the current request.</p>
+      <p>The expected tool inputs are:</p>
       <ul>
-        <li>The app does not store submitted form data.</li>
-        <li>The app does not use submitted form data for training.</li>
-        <li>The app does not sell user data.</li>
-        <li>The app does not call external APIs.</li>
-        <li>The app does not access external systems.</li>
-        <li>The app does not submit forms.</li>
-        <li>The app does not fill missing fields.</li>
-        <li>The app is read-only.</li>
-        <li>The app does not require login or user accounts.</li>
+        <li><code>fields</code>: an object containing submitted form field names and values.</li>
+        <li><code>required_fields</code>: an array of field names that must be present and non-empty for the form to be considered ready to submit.</li>
       </ul>
-      <p>Support contact: <a href="mailto:sidcraigau@gmail.com">sidcraigau@gmail.com</a></p>
-      <p><a href="/">Return home</a></p>
+      <p>The app does not collect data from external sources, does not scrape websites, and does not fetch additional data.</p>
+
+      <h2>2. Tool Outputs</h2>
+      <p>The app may return the following structured fields:</p>
+      <ul>
+        <li><code>can_submit</code>: whether the submitted fields satisfy the required-field validation rules.</li>
+        <li><code>missing_fields</code>: required fields that are missing, empty, or null.</li>
+        <li><code>invalid_fields</code>: fields that fail validation checks, if applicable.</li>
+        <li><code>errors</code>: structured validation or scope errors, if applicable.</li>
+      </ul>
+      <p>These outputs are generated only from the user-provided input.</p>
+
+      <h2>3. Purpose of Processing</h2>
+      <p>The submitted data is used only to validate whether the provided form fields satisfy the required submission conditions.</p>
+      <p>The app does not use submitted data for unrelated purposes, marketing, profiling, advertising, or training-specific user workflows.</p>
+      <p>The app does not decide whether a user should submit a form. It only checks the provided payload against explicit required-field rules.</p>
+
+      <h2>4. Recipients and Sharing</h2>
+      <p>The app does not sell user data.</p>
+      <p>The app does not intentionally share submitted data with third-party recipients.</p>
+      <p>The app does not call external APIs.</p>
+      <p>The app does not send submitted fields, validation results, or extracted values to downstream systems.</p>
+      <p>The app does not contact customers, applicants, form owners, service providers, or other external parties.</p>
+      <p>The app does not update forms, records, databases, calendars, email systems, ticketing systems, CRMs, or other external systems.</p>
+
+      <h2>5. Retention</h2>
+      <p>The app is designed to be stateless.</p>
+      <p>The app does not store submitted form data.</p>
+      <p>The app does not store submitted inputs or generated outputs after request processing is complete, aside from transient platform-level request handling and logs.</p>
+      <p>The app does not create user profiles or maintain historical records of submitted forms.</p>
+
+      <h2>6. User Controls</h2>
+      <p>Users control what they submit to the app.</p>
+      <p>Users should avoid submitting sensitive or unnecessary personal data.</p>
+      <p>Users may remove or redact sensitive details before submitting form fields for validation.</p>
+      <p>Users may choose not to use the app if they do not want their submitted fields processed for validation.</p>
+      <p>Privacy questions or deletion requests can be sent to: <a href="mailto:sidcraigau@gmail.com">sidcraigau@gmail.com</a></p>
+
+      <h2>7. Login and Accounts</h2>
+      <p>The app does not require user accounts, authentication, login credentials, or account creation.</p>
+
+      <h2>8. Read-Only Operation and No Side Effects</h2>
+      <p>The app is read-only.</p>
+      <p>No external APIs are called.</p>
+      <p>No downstream writes are performed.</p>
+      <p>The app does not submit forms.</p>
+      <p>The app does not fill missing fields.</p>
+      <p>The app does not rewrite user input.</p>
+      <p>The app does not modify records, send messages, make decisions, contact external parties, or perform operational actions.</p>
+
+      <h2>9. Contact</h2>
+      <p>Privacy questions can be sent to: <a href="mailto:sidcraigau@gmail.com">sidcraigau@gmail.com</a></p>
     </section>
   </main>
 </body>
