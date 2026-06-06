@@ -294,7 +294,11 @@ def root() -> FileResponse:
 
 @app.get("/privacy")
 def privacy() -> FileResponse:
-    return html_response("privacy.html")
+    return FileResponse(
+        os.path.join(BASE_DIR, "privacy.html"),
+        media_type="text/html",
+        headers={"Cache-Control": "no-store, max-age=0"},
+    )
 
 
 @app.get("/terms")
