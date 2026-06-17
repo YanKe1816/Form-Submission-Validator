@@ -107,6 +107,7 @@ TOOL_ANNOTATIONS = {
 OUTPUT_KEYS = {"can_submit", "missing_fields", "invalid_fields", "errors"}
 ERROR_CODES = {"missing_field", "invalid_value", "out_of_scope", "internal_error"}
 EMAIL_PATTERN = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+PHONE_PATTERN = re.compile(r"^[+()\-\s.\d]+$")
 OUT_OF_SCOPE_PATTERNS = [
     "should i submit",
     "can i submit",
@@ -150,6 +151,20 @@ def is_empty_required_value(value: Any) -> bool:
     if value is None:
         return True
     return isinstance(value, str) and value.strip() == ""
+
+
+def format_issue_for_required_field(field: str, value: Any) -> dict[str, str] | None:
+    normalized_field = field.strip().lower()
+    if normalized_field == "email":
+        if not isinstance(value, str) or not EMAIL_PATTERN.match(value.strip()):
+            return {"field": field, "reason": "invalid_email_format"}
+    if normalized_field == "phone":
+        if not isinstance(value, str):
+            return {"field": field, "reason": "invalid_phone_format"}
+        digits = re.sub(r"\D", "", value)
+        if not PHONE_PATTERN.match(value.strip()) or len(digits) < 7 or len(digits) > 15:
+            return {"field": field, "reason": "invalid_phone_format"}
+    return None
 
 
 def is_out_of_scope(arguments: Any) -> bool:
@@ -208,13 +223,14 @@ def validate_form_submission(arguments: Any) -> dict[str, Any]:
         for field in required_fields
         if field not in fields or is_empty_required_value(fields[field])
     ]
-    invalid_fields = []
-
-    email = fields.get("email")
-    if isinstance(email, str) and email.strip() and not EMAIL_PATTERN.match(email.strip()):
-        invalid_fields.append({"field": "email", "reason": "invalid_email_format"})
-    elif email is not None and not isinstance(email, str):
-        invalid_fields.append({"field": "email", "reason": "invalid_email_format"})
+    missing_field_set = set(missing_fields)
+    invalid_fields = [
+        issue
+        for field in required_fields
+        if field not in missing_field_set
+        for issue in [format_issue_for_required_field(field, fields[field])]
+        if issue is not None
+    ]
 
     return make_output(
         can_submit=not missing_fields and not invalid_fields,
